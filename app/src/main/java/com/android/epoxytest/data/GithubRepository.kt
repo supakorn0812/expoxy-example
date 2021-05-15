@@ -18,11 +18,9 @@ class GithubRepository(private val service: GithubService) {
         val pager =  Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = true
             ),
-            pagingSourceFactory = {
-                GithubPagingSource(service, query)
-            }
+            pagingSourceFactory = { GithubPagingSource(service, query) }
         )
         return pager
     }

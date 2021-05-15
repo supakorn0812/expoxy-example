@@ -68,6 +68,15 @@ class GithubPagingSource(
         // We need to get the previous key (or next key if previous is null) of the page
         // that was closest to the most recently accessed index.
         // Anchor position is the most recently accessed index
+
+        // Try to find the page key of the closest page to anchorPosition, from
+        // either the prevKey or the nextKey, but you need to handle nullability
+        // here:
+        //  * prevKey == null -> anchorPage is the first page.
+        //  * nextKey == null -> anchorPage is the last page.
+        //  * both prevKey and nextKey null -> anchorPage is the initial page, so
+        //    just return null.
+
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)

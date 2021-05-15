@@ -3,6 +3,7 @@ package com.android.epoxytest.di
 import com.android.epoxytest.ViewModelFactory
 import com.android.epoxytest.api.GithubService
 import com.android.epoxytest.data.GithubRepository
+import com.android.epoxytest.usecase.SearchGithubRepositoryPageUseCase
 
 object CompositionRoot {
 
@@ -12,8 +13,13 @@ object CompositionRoot {
     val githubService: GithubService
         get() = GithubService.create()
 
+    val searchGithubRepositoryPageUseCase: SearchGithubRepositoryPageUseCase
+        get() = SearchGithubRepositoryPageUseCase(
+            repository = githubRepository
+        )
+
     val viewModelFactory = ViewModelFactory(
-        repository = githubRepository
+        searchGithubRepositoryPageUseCase = searchGithubRepositoryPageUseCase
     )
 
 }

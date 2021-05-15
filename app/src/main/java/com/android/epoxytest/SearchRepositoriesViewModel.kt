@@ -7,8 +7,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
-import com.android.epoxytest.data.GithubRepository
 import com.android.epoxytest.data.model.UiModel
+import com.android.epoxytest.usecase.SearchGithubRepositoryPageUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BroadcastChannel
@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.map
 @FlowPreview
 @ExperimentalCoroutinesApi
 class SearchRepositoriesViewModel constructor(
-    private val repository: GithubRepository
+    private val searchGithubRepositoryPageUseCase: SearchGithubRepositoryPageUseCase,
 ) : ViewModel() {
 
     val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
@@ -31,11 +31,8 @@ class SearchRepositoriesViewModel constructor(
         .asLiveData()
 
     fun search(query: String): Flow<PagingData<UiModel>> {
-        val flow = repository.search(query).flow.map { pagingData ->
-            pagingData.map {
-                UiModel.RepoItem(it)
-            }
-        }
+        return searchGithubRepositoryPageUseCase.execute(query).flow
+            .map {  pagingData -> pagingData.map(UiModel::RepoItem) }
             .map {
                 it.insertSeparators<UiModel.RepoItem, UiModel> { before, after ->
                     when {
@@ -56,13 +53,12 @@ class SearchRepositoriesViewModel constructor(
                 }
             }
             .cachedIn(viewModelScope)
-        return flow
     }
 
     private val UiModel.RepoItem.roundedStarCount: Int
         get() = (this.repo.stars ?: 0) / 10_000
 
     companion object {
-        const val SEARCH_DELAY_MS = 750L
+        const val SEARCH_DELAY_MS = 1_000L
     }
 }

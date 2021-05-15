@@ -8,23 +8,35 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyRecyclerView
+import com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager
 import com.android.epoxytest.adapter.RepositoryController
 import com.android.epoxytest.di.CompositionRoot
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.debounce
 
+@ObsoleteCoroutinesApi
 @FlowPreview
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     lateinit var editTextSearch: EditText
     lateinit var recyclerView: EpoxyRecyclerView
+
+
+    private val channel by lazy {
+        BroadcastChannel<Unit>(Channel.CONFLATED)
+    }
+
+    private val flow by lazy {
+        channel.asFlow()
+            .debounce(2000)
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(this, CompositionRoot.viewModelFactory)
@@ -42,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         init(savedInstanceState)
         initViewModel()
-
     }
 
     private fun init(savedInstanceState: Bundle?) {
@@ -53,22 +64,33 @@ class MainActivity : AppCompatActivity() {
         }
         recyclerView.apply {
             setController(mController)
-            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            layoutManager =
+                StickyHeaderLinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
         }
 
         mController.addLoadStateListener { loadState ->
             // show empty list
-            val errorState = loadState.source.append as? LoadState.Error
-                ?: loadState.source.prepend as? LoadState.Error
-                ?: loadState.append as? LoadState.Error
-                ?: loadState.prepend as? LoadState.Error
 
-            errorState?.let {
-                Toast.makeText(
-                    this,
-                    "\uD83D\uDE28 Wooops ${it.error}",
-                    Toast.LENGTH_LONG
-                ).show()
+            lifecycleScope.launch {
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+
+                if(errorState != null) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "\uD83D\uDE28 Wooops ${errorState?.error}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    channel.send(Unit)
+                }
+            }
+
+        }
+
+        lifecycleScope.launch {
+            flow.collectLatest {
                 mController.retry()
             }
         }
