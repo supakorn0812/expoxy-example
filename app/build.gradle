@@ -53,6 +53,11 @@ dependencies {
     implementation Deps.coroutinesCore
     implementation Deps.coroutinesAndroid
     implementation Deps.lifecycleExtensions
+    implementation Deps.lifecycleViewModelKtx
+
+    implementation Deps.retrofit
+    implementation Deps.retrofitGsonConverter
+    implementation Deps.okhttpLoggingInterceptor
 
     implementation "com.facebook.shimmer:shimmer:0.5.0"
 
