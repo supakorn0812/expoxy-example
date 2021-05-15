@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="colorThird">#f9be00</color>
+
+    <color name="discountCouponBG">#f9be00</color>
+    <color name="productCouponBG">#ff681e</color>
+    <color name="watermarkCoupon">#00bcb4</color>
+    <color name="textDiscountcoupon">#FFFFFF</color>
+    <color name="textProductcoupon">#FFFFFF</color>
+
+    <color name="colorVoucher">#00bcb4</color>
+    <color name="textColorVoucher">#FFFFFF</color>
+    <color name="scandal">#5e7671</color>
+    <color name="bg_shop_online">#D8F1F0</color>
+    <color name="toolbarContent">#FFFFFF</color>
+    <color name="background_header">#00AFAC</color>
+
+    <color name="colorPrimary">#01A166</color>
+    <color name="colorPrimaryVariant">#00703B</color>
+    <color name="colorOnPrimary">@color/black</color>
+    <color name="colorSecondary">#D9FCF4</color>
+    <color name="colorSecondaryVariant">#A7C9C1</color>
+    <color name="colorOnSecondary">@color/black</color>
+    <color name="colorError">@color/red</color>
+    <color name="colorOnError">@color/white</color>
+
+    <color name="black">#000000</color>
+    <color name="black_neutral">#222222</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#E51224</color>
+    <color name="yellow">#E39F48</color>
+    <color name="cutty_sark">#5E7671</color>
+    <color name="black_alpha_87">#DE000000</color>
+    <color name="black_alpha_23">#3A000000</color>
+    <color name="martini">#979797</color>
+    <color name="grey_stroke">#80BFBFBF</color>
+    <color name="grey_circle">#E8E8E8</color>
+    <color name="reallyLightBlue">#d3fffe</color>
+    <color name="alto">#D8D8D8</color>
+    <color name="shimmer">#F5F5F5</color>
+    <color name="shimmer_base">#D8D8D8</color>
+    <color name="crimson">#E51224</color>
+    <color name="wild_sand">#F4F4F4</color>
+    <color name="persian_red">#D32F2F</color>
+    <color name="silver">#BFBFBF</color>
+    <color name="chip_disabled_bg">#F6F9FC</color>
+
+    <color name="text_image_coupon">@color/colorPrimary</color>
+    <color name="text_card_counpon_des">#000000</color>
+
+
+
+    <color name="textDesDiscountcoupon">#000000</color>
+    <color name="textDesProductcoupon">#000000</color>
+    <color name="watermarkProductCoupon">#FEF99A</color>
+    <color name="watermarkDiscountCoupon">#FEC580</color>
+
+    <color name="cardBarCodeColor">#f1f1f1</color>
+    <color name="badge">#F6E365</color>
+    <color name="special_bg">#f7e365</color>
+    <color name="basket_badge">#F9BE00</color>
+    <color name="light_silver">#ECF1F5</color>
+
+    <color name="bg_shopping_weekly_brand">#f2f2f2</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="watermarkVoucher">#1C7E58</color>
+    <color name="voucherCouponBG">#00A065</color>
+    <color name="white_snow">#f2f2f2</color>
+    <color name="white_smoke">#e0e0e0</color>
+    <color name="dark">#263238</color>
+    <color name="dividerColor">#f2f2f2</color>
+    <color name="dividerColorStoreMarker">#E0E0E0</color>
+    <color name="turquoise_20">#3400BCB4</color>
+
+    <color name="colorDeliveryType">#00bcb4</color>
+    <color name="colorDeliveryTypeDisable">#d8d8d8</color>
+    <color name="pinkishGrey">#bdbdbd</color>
+
+    <color name="colorTextDeliveryType">#00bfb2</color>
+    <color name="colorTextGreyBrown">#4f4f4f</color>
+    <color name="colorTextGrey">#424242</color>
+    <color name="colorTextGreyLight">#6b6b6b</color>
+    <color name="colorTextGreyDistance">#9aa0a6</color>
+    <color name="colorTextStoreName">#00bfb2</color>
+    <color name="colorStoreSelect">#d3fffe</color>
+
+    <color name="basket_header_background">#ECF1F5</color>
+    <color name="basket_saved_text">#EB7E74</color>
+    <color name="basket_disable">#9FFFFFFF</color>
+    <color name="bg_basket_notify">#B0F85C</color>
+    <color name="weightPickerHighlight">#C8C8C8</color>
+    <color name="colorPromotionMet">#cfe5d6</color>
+    <color name="colorPromotionMissed">#f4eac8</color>
+    <color name="textBlack">#424242</color>
+    <color name="skeleton">#E8E8E8</color>
+    <color name="colorBackgroundBottomSheet">#F3F3F3</color>
+    <color name="colorButtonActive">#00bcb4</color>
+
+    <!-- Select Address -->
+    <color name="color_gray">#E8E8E8</color>
+    <color name="color_badge_drag_background">#A3A3A3</color>
+    <color name="color_text_primary">#424242</color>
+    <color name="color_text_secondary">#6B6B6B</color>
+    <color name="color_text_hint">#A3A3A3</color>
+    <color name="color_skeleton">#F3F3F3</color>
+    <color name="color_shimmer">#F7F7F7</color>
+    <color name="color_shimmer_base">#F3F3F3</color>
+
+    <color name="couponBackground">#CEF3F1</color>
+    <color name="unselected_indicator">#6b6b6b</color>
+    <color name="selected_indicator">#ffffff</color>
+    <color name="selected_indicator_primary_color">@color/colorPrimary</color>
+    <color name="unselected_indicator_light_grey_color">#A3A3A3</color>
+    <color name="color_skeleton_unselected_indicator">#E0E0E0</color>
+
+    <!-- Promotion Banner -->
+    <color name="color_selected_indicator">@color/white</color>
+    <color name="color_bg_promotion">#F3F3F3</color>
+
+    <!--New Color Naming-->
+    <color name="grey">#E8E8E8</color>
+    <color name="greyDark">#424242</color>
+
+    <color name="color_unselected_slot">#7D7D7D</color>
+
+    <color name="blue_chill">#0D9B94</color>
+    <color name="genoa">#147975</color>
+    <color name="cruise">#B0EAE7</color>
+    <color name="silver_shorthand">#CCCCCC</color>
+    <color name="silver_chalice">#A3A3A3</color>
+</resources>
