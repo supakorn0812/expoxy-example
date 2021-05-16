@@ -15,13 +15,13 @@ class RepositoryController : PagingDataEpoxyController<UiModel>(), StickyHeaderC
 
     override fun buildItemModel(currentPosition: Int, item: UiModel?): EpoxyModel<*> {
         Log.d("paging_current", "$currentPosition")
-        val model = when {
-            item is UiModel.RepoItem -> {
+        return when (item) {
+            is UiModel.RepoItem -> {
                 RepoViewBindingModel_()
                     .id("repo_view_$currentPosition")
                     .repo(item.repo)
             }
-            item is UiModel.SeparatorItem -> {
+            is UiModel.SeparatorItem -> {
                 SeparatorViewBindingModel_()
                     .id("skeleton_$currentPosition")
                     .item(item)
@@ -31,7 +31,6 @@ class RepositoryController : PagingDataEpoxyController<UiModel>(), StickyHeaderC
                     .id("repo_view_skeleton_$currentPosition")
             }
         }
-        return model
     }
 
     override fun isStickyHeader(position: Int): Boolean {

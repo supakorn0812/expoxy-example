@@ -1,15 +1,17 @@
 package com.android.epoxytest
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.epoxy.EpoxyRecyclerView
+import com.airbnb.epoxy.*
 import com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager
 import com.android.epoxytest.adapter.RepositoryController
 import com.android.epoxytest.di.CompositionRoot
@@ -71,13 +73,15 @@ class MainActivity : AppCompatActivity() {
         mController.addLoadStateListener { loadState ->
             // show empty list
 
+            Log.d("loadState_", "\n${displayLoadState(loadState)}\n")
+
             lifecycleScope.launch {
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
                     ?: loadState.prepend as? LoadState.Error
 
-                if(errorState != null) {
+                if (errorState != null) {
                     Toast.makeText(
                         this@MainActivity,
                         "\uD83D\uDE28 Wooops ${errorState?.error}",
@@ -93,6 +97,19 @@ class MainActivity : AppCompatActivity() {
             flow.collectLatest {
                 mController.retry()
             }
+        }
+    }
+
+    private fun displayLoadState(loadState: CombinedLoadStates): String {
+        return listOf(
+            "loadState.prepend" to "${loadState.prepend}",
+            "loadState.append" to "${loadState.append}",
+            "loadState.source" to "${loadState.source}",
+            "loadState.refresh" to "${loadState.refresh}",
+            "loadState.mediator" to "${loadState.mediator}"
+
+        ).joinToString("\n","\n","\n") { (label, state) ->
+            "($label\t,\t$state)"
         }
     }
 

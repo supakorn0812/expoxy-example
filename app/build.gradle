@@ -43,8 +43,9 @@ android {
 project.android.buildTypes.all { buildType ->
     buildType.javaCompileOptions.annotationProcessorOptions.arguments =
             [
-                    logEpoxyTimings  : "true",
-                    enableParallelEpoxyProcessing     : "true"
+                    logEpoxyTimings              : "true",
+                    enableParallelEpoxyProcessing: "true",
+                    epoxyDisableDslMarker        : "true"
             ]
 }
 
@@ -61,10 +62,10 @@ dependencies {
 
     implementation "com.facebook.shimmer:shimmer:0.5.0"
 
-    kapt "com.airbnb.android:epoxy-processor:4.5.0"
-    implementation "com.airbnb.android:epoxy:4.5.0"
-    implementation "com.airbnb.android:epoxy-paging3:4.5.0"
-    implementation "com.airbnb.android:epoxy-databinding:4.5.0"
+    kapt "com.airbnb.android:epoxy-processor:4.6.1"
+    implementation "com.airbnb.android:epoxy:4.6.1"
+    implementation "com.airbnb.android:epoxy-paging3:4.6.1"
+    implementation "com.airbnb.android:epoxy-databinding:4.6.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
